@@ -26,8 +26,6 @@ public:
 public:
     void AddBlock();
 
-    void SetHeadPos(int x, int y);
-
     CBlock* PrevParent;
 
     int VelX;
