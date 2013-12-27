@@ -13,7 +13,6 @@ CBlock::CBlock(int x, int y)
 
 CBlock::~CBlock()
 {
-    std::cout << "~CBlock" << std::endl; // This is a talking deconstructor
 }
 
 void CBlock::OnRender(SDL_Surface* Surf_Destination)
