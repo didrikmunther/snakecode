@@ -1,4 +1,5 @@
 #include "CSnake.h"
+#include "CBlock.h"
 
 std::vector<CSnake*> CSnake::SnakeList;
 
@@ -19,8 +20,7 @@ CSnake::~CSnake()
     for(std::vector<CBlock*>::iterator it = BlockList.begin(); it != BlockList.end(); it++)
     {
         delete (*it); // delete calls the deconstructor
-                      // Remember that clear does not call the deconstructor on vectors of pointers!
-        std::cout << "from ~CSnake" << std::endl;
+                      // Remember that .clear() does not call the deconstructor on vectors of pointers!
     }
     BlockList.clear();
 }
@@ -58,4 +58,19 @@ void CSnake::AddBlock()
         BlockList.push_back(Block);
     }
     catch(std::bad_alloc){/*"good enough"*/}
+}
+
+void CSnake::RemoveBlock()
+{
+    if(PrevParent->Parent != NULL) // If not the last object is the head.
+    {
+        PrevParent = PrevParent->Parent;
+
+        std::vector<CBlock*>::iterator it = BlockList.end();
+
+        delete (*it); // Does this destroy the whole element and object?
+
+        BlockList.pop_back(); // Removes the last element from the vector!
+
+    }
 }
