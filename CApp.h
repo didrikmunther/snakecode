@@ -9,8 +9,6 @@
 #include <iostream>
 #include <vld.h> // how do I use this? (Visual Leak Detector)
 
-#define NO_STDIO_REDIRECT
-
 class CApp
 {
 private:
