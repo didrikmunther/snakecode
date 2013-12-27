@@ -1,49 +1,48 @@
-#include "CApp.h"
+#ifndef CAPP_H
+#define CAPP_H
 
-CApp::CApp()
+#include <SDL.h>
+#include <vector>
+#include "CRect.h"
+#include "CSnake.h"
+#include "CBlock.h"
+#include <iostream>
+#include <vld.h> // how do I use this? (Visual Leak Detector)
+
+class CApp
 {
-    Surf_Display = NULL;
+private:
+    bool Running;
 
-    Running = true;
+    SDL_Surface* Surf_Display;
 
-    //===
+    //==
 
-    framestarttime = 0;
+    Uint32 waittime;
+    Uint32 framestarttime;
+    Sint32 delaytime;
 
-    waittime = 1000.0f/FPS;
-}
+    #define FPS 5
 
-int CApp::OnExecute()
-{
-    if(OnInit() == false) return -1;
+public:
+    CApp();
 
-    SDL_Event Event;
+    int OnExecute();
 
-    while(Running)
-    {
-        while(SDL_PollEvent(&Event))
-        {
-            OnEvent(&Event);
-        }
+public:
+    bool OnInit();
 
-        OnLoop();
+    void OnEvent(SDL_Event* Event);
 
-        OnRender();
+    void OnLoop();
 
-        delaytime = waittime - (SDL_GetTicks() - framestarttime);
-        if(delaytime > 0)
-            SDL_Delay((Uint32)delaytime);
-        framestarttime = SDL_GetTicks();
-    }
+    void OnRender();
 
-    OnCleanup();
+    void OnCleanup();
 
-    return 0;
-}
+public:
+    CSnake* Player;
 
-int main(int argc, char* argv[])
-{
-    CApp theApp;
+};
 
-    return theApp.OnExecute();
-}
+#endif // CAPP_H
