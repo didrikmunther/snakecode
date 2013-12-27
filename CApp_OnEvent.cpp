@@ -14,6 +14,10 @@ void CApp::OnEvent(SDL_Event* Event)
             Player->AddBlock();
             break;
 
+        case SDLK_d:
+            Player->RemoveBlock();
+            break;
+
         case SDLK_UP:
             Player->VelY = -1;
             Player->VelX = 0;
