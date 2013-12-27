@@ -3,7 +3,9 @@
 
 #include <vector>
 #include <iostream>
-#include "CBlock.h"
+#include <SDL.h>
+
+class CBlock;
 
 class CSnake
 {
@@ -25,6 +27,9 @@ public:
 
 public:
     void AddBlock();
+    void RemoveBlock();
+
+    void SetHeadPos(int x, int y);
 
     CBlock* PrevParent;
 
